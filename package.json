@@ -1,0 +1,23 @@
+{
+  "name": "racer-util",
+  "version": "0.0.0",
+  "description": "Utility functions for racer",
+  "main": "index.js",
+  "devDependencies": {
+    "mocha": "*",
+    "expect.js": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codeparty/racer-util.git"
+  },
+  "keywords": [
+    "racer",
+    "derby"
+  ],
+  "author": "Brian Noguchi <brian.noguchi@gmail.com>",
+  "license": "MIT"
+}
