@@ -2,6 +2,7 @@ module.exports = {
   merge: merge
 , extract: extract
 , deepEqual: deepEqual
+, only: objectWithOnly
 };
 
 function merge () {
@@ -114,4 +115,13 @@ function objEquiv (a, b, ignoreMap) {
 
 function isArguments (obj) {
   return toString.call(obj) === '[object Arguments]';
+}
+
+function objectWithOnly (obj, paths) {
+  var projectedDoc = {};
+  for (var i = 0, l = paths.length; i < l; i++) {
+    var path = paths[i];
+    assign(projectedDoc, path, lookup(path, obj));
+  }
+  return projectedDoc;
 }
