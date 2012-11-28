@@ -1,5 +1,6 @@
 module.exports = {
   curry: curry
+, noop: noop
 };
 
 function curry (fn/*, prefix...*/) {
@@ -9,3 +10,5 @@ function curry (fn/*, prefix...*/) {
     return fn.apply(this, args);
   };
 }
+
+function noop () {}
