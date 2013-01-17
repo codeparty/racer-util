@@ -4,6 +4,7 @@ module.exports = {
 , deepEqual: deepEqual
 , only: objectWithOnly
 , filter: filter
+, assign: assign
 };
 
 function merge () {
