@@ -3,6 +3,7 @@ module.exports = {
 , extract: extract
 , deepEqual: deepEqual
 , only: objectWithOnly
+, filter: filter
 };
 
 function merge () {
@@ -124,4 +125,13 @@ function objectWithOnly (obj, paths) {
     assign(projectedDoc, path, lookup(path, obj));
   }
   return projectedDoc;
+}
+
+function filter (obj, fn) {
+  var filtered = {};
+  for (var k in obj) {
+    var curr = obj[k];
+    if (fn(curr, k)) filtered[k] = curr;
+  }
+  return filtered;
 }
