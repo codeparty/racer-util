@@ -135,3 +135,27 @@ function filter (obj, fn) {
   }
   return filtered;
 }
+
+function assign (obj, path, val) {
+  var parts = path.split('.')
+    , lastIndex = parts.length - 1;
+  for (var i = 0, l = parts.length; i < l; i++) {
+    var prop = parts[i];
+    if (i === lastIndex) obj[prop] = val;
+    else                 obj = obj[prop] || (obj[prop] = {});
+  }
+};
+
+function lookup (path, obj) {
+  if (!obj) return;
+  if (path.indexOf('.') === -1) return obj[path];
+
+  var parts = path.split('.');
+  for (var i = 0, l = parts.length; i < l; i++) {
+    if (!obj) return obj;
+
+    var prop = parts[i];
+    obj = obj[prop];
+  }
+  return obj;
+};
