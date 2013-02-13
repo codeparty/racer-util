@@ -4,6 +4,8 @@ module.exports = {
 , extract: extract
 , deepEqual: deepEqual
 , only: objectWithOnly
+, filter: filter
+, assign: assign
 };
 
 function merge () {
@@ -142,4 +144,40 @@ function objectWithOnly (obj, paths) {
     assign(projectedDoc, path, lookup(path, obj));
   }
   return projectedDoc;
+}
+
+function filter (obj, fn) {
+  var filtered = {};
+  for (var k in obj) {
+    var curr = obj[k];
+    if (fn(curr, k)) filtered[k] = curr;
+  }
+  return filtered;
+}
+
+function assign (obj, path, val) {
+  var parts = path.split('.')
+    , lastIndex = parts.length - 1;
+  for (var i = 0, l = parts.length; i < l; i++) {
+    var prop = parts[i];
+    if (i === lastIndex) {
+      obj[prop] = val;
+    } else {
+      obj = obj[prop] || (obj[prop] = {});
+    }
+  }
+}
+
+function lookup (path, obj) {
+  if (!obj) return;
+  if (path.indexOf('.') === -1) return obj[path];
+
+  var parts = path.split('.');
+  for (var i = 0, l = parts.length; i < l; i++) {
+    if (!obj) return obj;
+
+    var prop = parts[i];
+    obj = obj[prop];
+  }
+  return obj;
 }
