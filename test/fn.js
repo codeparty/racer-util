@@ -14,4 +14,17 @@ describe('fn', function () {
     });
 
   });
+
+  describe('bind', function () {
+    var bind = fn.bind;
+    it('should work', function () {
+      function greet (name) {
+        return this.hello + ', ' + name;
+      }
+      var pig = { hello: 'oink' };
+      var dog = { hello: 'woof' };
+      expect(bind(greet, pig)('nate')).to.equal('oink, nate');
+      expect(bind(greet, dog)('brian')).to.equal('woof, brian');
+    });
+  });
 });
