@@ -1,5 +1,6 @@
 module.exports = {
   merge: merge
+, deepCopy: deepCopy
 , extract: extract
 , deepEqual: deepEqual
 , only: objectWithOnly
@@ -16,6 +17,23 @@ function merge () {
     }
   }
   return merged;
+}
+
+// TODO Test this
+function deepCopy (obj) {
+  if (obj === null) return null;
+  if (typeof obj === 'object') {
+    var copy;
+    if (Array.isArray(obj)) {
+      copy = [];
+      for (var i = obj.length; i--; ) copy[i] = deepCopy(obj[i]);
+      return copy;
+    }
+    copy = {}
+    for (var k in obj) copy[k] = deepCopy(obj[k]);
+    return copy;
+  }
+  return obj;
 }
 
 function extract (key, obj) {
@@ -142,10 +160,13 @@ function assign (obj, path, val) {
     , lastIndex = parts.length - 1;
   for (var i = 0, l = parts.length; i < l; i++) {
     var prop = parts[i];
-    if (i === lastIndex) obj[prop] = val;
-    else                 obj = obj[prop] || (obj[prop] = {});
+    if (i === lastIndex) {
+      obj[prop] = val;
+    } else {
+      obj = obj[prop] || (obj[prop] = {});
+    }
   }
-};
+}
 
 function lookup (path, obj) {
   if (!obj) return;
@@ -159,4 +180,4 @@ function lookup (path, obj) {
     obj = obj[prop];
   }
   return obj;
-};
+}
