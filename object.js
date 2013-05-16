@@ -6,6 +6,7 @@ module.exports = {
 , only: objectWithOnly
 , filter: filter
 , assign: assign
+, matchingVal: matchingVal
 };
 
 function merge () {
@@ -180,4 +181,12 @@ function lookup (path, obj) {
     obj = obj[prop];
   }
   return obj;
+}
+
+function matchingVal (obj, predicate) {
+  var val;
+  for (var k in obj) {
+    val = obj[k];
+    if (predicate(k, val)) return val;
+  }
 }
