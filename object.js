@@ -161,6 +161,9 @@ function assign (obj, path, val) {
     , lastIndex = parts.length - 1;
   for (var i = 0, l = parts.length; i < l; i++) {
     var prop = parts[i];
+    if(/^\d+$/.test(prop)) {
+      prop = parseInt(prop, 10);
+    }
     if (i === lastIndex) {
       obj[prop] = val;
     } else {
