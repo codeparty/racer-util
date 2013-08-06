@@ -7,6 +7,7 @@ module.exports = {
 , filter: filter
 , assign: assign
 , matchingVal: matchingVal
+, lookup: lookup
 };
 
 function merge () {
