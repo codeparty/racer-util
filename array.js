@@ -3,6 +3,7 @@ var deepEqual = require('./object').deepEqual;
 
 module.exports = {
   any: any
+, find: find
 , indexOfFn: indexOfFn
 , deepIndexOf: deepIndexOf
 };
@@ -12,6 +13,12 @@ function any (xs, fn) {
     if (fn(xs[i])) return true;
   }
   return false;
+}
+
+function find (xs, fn) {
+  for (var i = 0, l = xs.length; i < l; i++) {
+    if (fn(xs[i])) return xs[i];
+  }
 }
 
 function indexOfFn (xs, fn) {
